@@ -11,6 +11,16 @@ cask "pi-sticky-prompt" do
 
   app "PiStickyPrompt.app"
 
+  # The .app is ad-hoc signed, so brew tags it with com.apple.quarantine and
+  # Gatekeeper blocks the first launch. Strip the attribute on install so
+  # users can launch normally. (They still get standard system protections;
+  # this only skips the "unidentified developer" prompt.)
+  postflight do
+    system_command "/usr/bin/xattr",
+                   args: ["-cr", "#{appdir}/PiStickyPrompt.app"],
+                   sudo: false
+  end
+
   zap trash: [
     "~/Library/Preferences/org.pi.sticky-prompt.plist",
     "~/Library/Saved Application State/org.pi.sticky-prompt.savedState",
@@ -27,9 +37,5 @@ cask "pi-sticky-prompt" do
 
     Then start any pi session, launch PiStickyPrompt, and use Cmd+Opt+P
     to toggle the bar.
-
-    The app is ad-hoc signed, so on first launch macOS may show a
-    Gatekeeper prompt. Right-click the app in /Applications and choose
-    "Open" once to whitelist it.
   EOS
 end
