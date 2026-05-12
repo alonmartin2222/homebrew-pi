@@ -1,6 +1,6 @@
 cask "pi-sticky-prompt" do
-  version "0.1.2"
-  sha256 "79476e63ce55dcbdf51eb68254516b8160e0cba247a0ad31df917d0137b62bc3"
+  version "0.1.3"
+  sha256 "195433cfe184f9187d7980526b353ab6e266807edef9fdddffa37a55df14bfb8"
 
   url "https://github.com/alonmartin2222/pi-sticky-prompt/releases/download/v#{version}/PiStickyPrompt.app.zip"
   name "Pi Sticky Prompt"
